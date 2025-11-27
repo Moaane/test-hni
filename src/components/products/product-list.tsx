@@ -7,6 +7,7 @@ import ProductCard from "./product-card"
 import ProductCardSkeleton from "./product-card-skeleton"
 import ProductFiltersDrawer from "./product-filters-drawer"
 import Image from "next/image"
+import { notFound } from "next/navigation"
 
 interface ComponentProps {
   query?: string
@@ -29,13 +30,12 @@ export default function ProductList({
     skip: number
     limit: number
   }>({ total: 0, skip: 0, limit: 50 })
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [hasMore, setHasMore] = useState<boolean>(true)
 
-  const fetchProducts = async (customSkip?: number) => {
+  const fetchProducts = async (customSkip?: number, replace = false) => {
     const currentSkip = customSkip !== undefined ? customSkip : meta.skip
 
-    if (loading || (!hasMore && customSkip === undefined)) return
     setLoading(true)
     try {
       const currentMeta = { ...meta, skip: currentSkip }
@@ -63,6 +63,7 @@ export default function ProductList({
           newData = newData.filter((p) => p.price <= priceMax)
 
         setProducts((prev) => {
+          if (replace) return newData
           if (currentSkip === 0) return newData
           const map = new Map()
           ;[...prev, ...newData].forEach((item) => map.set(item.id, item))
@@ -110,7 +111,7 @@ export default function ProductList({
     setProducts([])
     setMeta({ total: 0, skip: 0, limit: 50 })
     setHasMore(true)
-    fetchProducts(0)
+    fetchProducts(0, true)
   }, [query, priceMin, priceMax, category, rating])
 
   return (
@@ -123,22 +124,24 @@ export default function ProductList({
         <ProductFiltersDrawer />
       </div>
 
-      {products.length === 0 && !loading ? (
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {products.map((p) => (
+          <ProductCard key={p.id} product={p} />
+        ))}
+
+        {loading &&
+          Array.from({ length: meta.limit }).map((_, idx) => (
+            <ProductCardSkeleton key={`skeleton-${idx}`} />
+          ))}
+      </div>
+
+      {!loading && products.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20">
           <p className="text-6xl mb-4">😕</p>
           <p className="text-gray-500 text-lg">No products found.</p>
-          <p className="text-gray-500 text-base mt-1">Try search another products.</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-
-          {loading &&
-            Array.from({ length: meta.limit }).map((_, idx) => (
-              <ProductCardSkeleton key={`skeleton-${idx}`} />
-            ))}
+          <p className="text-gray-500 text-base mt-1">
+            Try search another products.
+          </p>
         </div>
       )}
 

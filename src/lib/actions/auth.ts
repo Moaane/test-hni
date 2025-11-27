@@ -38,7 +38,7 @@ export async function login({
 
   cookieStore.set("access-token", result.accessToken, {
     httpOnly: true,
-    maxAge: 60 * 1,
+    maxAge: 60 * 10,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/",
@@ -75,7 +75,7 @@ export async function updateToken(request: NextRequest) {
     const res = NextResponse.next()
     res.cookies.set("access-token", result.accessToken, {
       httpOnly: true,
-      maxAge: 60 * 1,
+      maxAge: 60 * 10,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
       path: "/",
