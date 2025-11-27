@@ -36,10 +36,14 @@ export default function LoginForm() {
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     try {
       setLoading(true)
-      await login({ values })
-      router.replace("/")
-    } catch (error: any) {
-      setError(error.message || "something went wrong")
+      const response = await login({ values })
+      if (response.success) {
+        router.replace("/")
+      } else {
+        setError("Invalid username or password")
+      }
+    } catch (error) {
+      console.error(error)
     } finally {
       setLoading(false)
     }

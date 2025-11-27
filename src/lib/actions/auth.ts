@@ -10,45 +10,41 @@ export async function login({
   values,
 }: {
   values: z.infer<typeof LoginSchema>
-}) {
-  try {
-    const cookieStore = await cookies()
-    const response = await fetch("https://dummyjson.com/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: values.username,
-        password: values.password,
-        expiresInMins: 30,
-      }),
-    })
+}): Promise<{ success: boolean }> {
+  const cookieStore = await cookies()
+  const response = await fetch("https://dummyjson.com/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: values.username,
+      password: values.password,
+      expiresInMins: 30,
+    }),
+  })
 
-    const result = await response.json()
+  const result = await response.json()
 
-    if (!response.ok) {
-      throw new Error(result.message)
-    }
-
-    cookieStore.set("refresh-token", result.refreshToken, {
-      httpOnly: true,
-      maxAge: 60 * 60,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-    })
-
-    cookieStore.set("access-token", result.accessToken, {
-      httpOnly: true,
-      maxAge: 60 * 1,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-    })
-
-    return { success: true }
-  } catch (error: unknown) {
-    throw error
+  if (!response.ok) {
+    return { success: false }
   }
+
+  cookieStore.set("refresh-token", result.refreshToken, {
+    httpOnly: true,
+    maxAge: 60 * 60,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+  })
+
+  cookieStore.set("access-token", result.accessToken, {
+    httpOnly: true,
+    maxAge: 60 * 1,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+  })
+
+  return { success: true }
 }
 
 export async function updateToken(request: NextRequest) {
