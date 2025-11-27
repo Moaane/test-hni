@@ -65,7 +65,7 @@ export function CartItem({ p, onUpdate }: ComponentProps) {
           <div className="text-right gap-2 lg:gap-1 flex flex-row lg:flex-col items-end">
             <p className="text-lg font-semibold">${totalPrice}</p>
             <p className="text-sm text-muted-foreground line-through">
-              ${p.price * quantity}
+              ${Math.ceil(p.price * quantity)}
             </p>
           </div>
 

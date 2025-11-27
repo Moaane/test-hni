@@ -56,7 +56,9 @@ export default async function ProductDetail({
         <Card className="lg:col-span-2">
           <CardHeader className="gap-4">
             <div className="grid gap-2">
-              <CardTitle className="text-lg lg:text-xl">{product?.title}</CardTitle>
+              <CardTitle className="text-lg lg:text-xl">
+                {product?.title}
+              </CardTitle>
               <div className="flex items-center gap-2">
                 <p className="text-sm">
                   Stock: <span className="font-semibold">{product?.stock}</span>
@@ -76,9 +78,11 @@ export default async function ProductDetail({
             </div>
 
             <div className="flex items-end gap-2">
-              <p className="text-xl md:text-2xl lg:text-4xl font-semibold">${productFinalPrice}</p>
+              <p className="text-xl md:text-2xl lg:text-4xl font-semibold">
+                ${productFinalPrice}
+              </p>
               <p className="text-xs md:text-sm font-semibold line-through text-destructive/50">
-                ${product?.price}
+                ${Math.ceil(product?.price)}
               </p>
             </div>
           </CardHeader>
