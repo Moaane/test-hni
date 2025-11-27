@@ -35,7 +35,7 @@ export default function Navbar() {
 
   return (
     <nav className="py-4 border-b sticky top-0 bg-background z-50 container max-w-7xl mx-auto">
-      <div className="flex items-center justify-between gap-6">
+      <div className="flex items-center justify-between gap-4 lg:gap-6">
         <div className="flex items-center gap-2 lg:gap-6 w-full">
           <Link href="/" className="hidden md:block">
             <Image
@@ -59,7 +59,7 @@ export default function Navbar() {
           <NavbarSearch />
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 lg:gap-4">
           <Link href="/cart">
             <Button variant="secondary" size="icon">
               <ShoppingCart className="size-5" />
