@@ -13,7 +13,7 @@ export default function LoginPage() {
               height={32}
               width={32}
               alt="logo ecommerce"
-              className="object-contain mb-1"
+              className="h-auto mb-1"
             />
             <span className="font-bold text-xl">Ecommerce</span>
           </div>
@@ -38,7 +38,8 @@ export default function LoginPage() {
         <Image
           src="/images/banner.jpg"
           alt="banner ecommerce"
-          layout="fill"
+          fill
+          sizes="52"
           className="object-cover"
           priority
         />

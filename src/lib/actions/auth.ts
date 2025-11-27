@@ -30,7 +30,7 @@ export async function login({
 
   cookieStore.set("refresh-token", result.refreshToken, {
     httpOnly: true,
-    maxAge: 60 * 60,
+    maxAge: 60 * 60 * 24,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/",
@@ -70,7 +70,7 @@ export async function updateToken(request: NextRequest) {
     }
 
     const result = await response.json()
-    console.log("REFRESH TOKEN MANG")
+    // console.log("REFRESH TOKEN MANG")
 
     const res = NextResponse.next()
     res.cookies.set("access-token", result.accessToken, {
@@ -83,7 +83,7 @@ export async function updateToken(request: NextRequest) {
 
     res.cookies.set("refresh-token", result.refreshToken, {
       httpOnly: true,
-      maxAge: 60 * 60,
+      maxAge: 60 * 60 * 24,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
       path: "/",

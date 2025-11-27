@@ -21,14 +21,6 @@ export const metadata: Metadata = {
       "Shop your favorite products, manage your cart, and enjoy a personalized online shopping experience.",
     url: "https://www.example.com",
     siteName: "E-commerce Store",
-    images: [
-      {
-        url: "https://www.example.com/images/og-banner.jpg",
-        width: 1200,
-        height: 630,
-        alt: "E-commerce Banner",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -37,7 +29,6 @@ export const metadata: Metadata = {
     title: "E-commerce Store",
     description:
       "Shop your favorite products, manage your cart, and enjoy a personalized online shopping experience.",
-    images: ["https://www.example.com/images/og-banner.jpg"],
   },
 }
 export default function RootLayout({
