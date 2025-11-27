@@ -39,7 +39,7 @@ export default function LoginForm() {
       await login({ values })
       router.replace("/")
     } catch (error: any) {
-      setError(error)
+      setError(error.message || "something went wrong")
     } finally {
       setLoading(false)
     }

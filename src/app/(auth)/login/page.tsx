@@ -20,7 +20,7 @@ export default function LoginPage() {
         </Link>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-sm space-y-6 xl:space-y-12">
-            <div className="xl:space-y-2 text-center">
+            <div className="xl:space-y-2 text-center space-y-2">
               <h1 className="text-2xl xl:text-4xl font-bold">
                 Sign in to your account
               </h1>
