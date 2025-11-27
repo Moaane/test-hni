@@ -12,7 +12,7 @@ import { useEffect, useState } from "react"
 function CartSkeleton() {
   return (
     <div className="py-4 space-y-4">
-      <div className="flex justify-between items-start">
+      <div className="flex gap-y-6 lg:gap-y-0 flex-col lg:flex-row justify-between items-start">
         {/* Left – Image & Title */}
         <div className="flex items-center gap-4">
           <Skeleton className="h-24 w-24 rounded-lg" />
@@ -23,7 +23,7 @@ function CartSkeleton() {
         </div>
 
         {/* Right – Price & Actions */}
-        <div className="flex flex-col items-end gap-4">
+        <div className="flex flex-row lg:flex-col items-end justify-between lg:justify-normal w-full gap-4">
           <div className="text-right space-y-2">
             <Skeleton className="h-5 w-20" />
             <Skeleton className="h-4 w-16" />
