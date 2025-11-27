@@ -20,8 +20,11 @@ interface ComponentProps {
 }
 
 export function CartItem({ p, onUpdate }: ComponentProps) {
-  const finalPrice = Math.ceil(p.price - (p.price * p.discountPercentage) / 100)
   const [quantity, setQuantity] = useState<number>(p.qty)
+  const finalPricePerItem = Math.ceil(
+    p.price - (p.price * p.discountPercentage) / 100
+  )
+  const totalPrice = finalPricePerItem * quantity
 
   const debouncedQtyUpdate = useMemo(
     () =>
@@ -60,9 +63,9 @@ export function CartItem({ p, onUpdate }: ComponentProps) {
         {/* Price */}
         <div className="lg:gap-6 flex flex-row lg:flex-col items-center lg:items-end justify-between lg:justify-normal">
           <div className="text-right gap-2 lg:gap-1 flex flex-row lg:flex-col items-end">
-            <p className="text-lg font-semibold">${finalPrice}</p>
+            <p className="text-lg font-semibold">${totalPrice}</p>
             <p className="text-sm text-muted-foreground line-through">
-              ${p.price}
+              ${p.price * quantity}
             </p>
           </div>
 
