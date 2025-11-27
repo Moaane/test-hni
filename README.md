@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-Commerce Demo Project
 
-## Getting Started
+**Live Demo:** https://ecommerce-ten-wine-28.vercel.app/
 
-First, run the development server:
+## Deskripsi Proyek
+
+Proyek ini adalah aplikasi **e-commerce** sederhana yang dibuat sebagai bagian dari tes masuk kerja.
+Tujuannya adalah membuat fitur utama toko online, termasuk **search**, **filter kategori**, dan **cart**.
+
+**Catatan:**
+
+* Menggunakan **[DummyJSON API](https://dummyjson.com/)** untuk data produk.
+* DummyJSON tidak mendukung **filter lokasi**, sehingga fitur lokasi tidak diterapkan.
+* Search dan filter kategori dibuat secara **manual di sisi client**.
+
+---
+
+## Fitur
+* **Produk Detail**: Lihat produk detail dengan carousel dan deskripsi.
+  ![Search](./screenshots/product.png)
+* **Search Produk**: Cari produk berdasarkan nama secara real-time.
+  ![Search](./screenshots/search.png)
+* **Filter Kategori**: Pilih produk berdasarkan kategori yang tersedia.
+  ![Filter](./screenshots/filter.png)
+* **Cart / Keranjang Belanja**:
+
+  * Tambahkan produk ke cart.
+  * Update quantity dengan debounce.
+  * Hapus produk dari cart.
+  * Cart disimpan di **localStorage** agar tetap ada saat refresh halaman.
+    ![Cart](./screenshots/cart.png)
+* **Skeleton Loading**: Efek shimmer saat data sedang dimuat.
+* **Responsive Layout**: Tampilan mobile & desktop friendly.
+* **UI Modern**: Menggunakan **shadcn/ui + Tailwind CSS**.
+
+---
+
+## Teknologi
+
+* **Frontend**: Next.js 16, React 19
+* **UI Components**: shadcn/ui + Tailwind CSS
+* **State Management**: React Hooks (`useState`, `useEffect`, `useMemo`, `useCallback`)
+* **Data Storage**: LocalStorage untuk cart
+* **API**: DummyJSON untuk produk
+
+---
+
+## Struktur Folder
+
+```
+├─ app/
+│  ├─ (main)/
+│  │  ├─ cart/
+│  │  ├─ products/
+│  │  └─ page.tsx
+├─ components/
+│  ├─ cart/
+│  │  ├─ cart-item.tsx
+│  │  └─ cart-skeleton.tsx
+│  ├─ products/
+│  │  ├─ filters/
+│  │  ├─ product-card.tsx
+│  │  └─ product-skeleton.tsx
+│  ├─ ui/
+│  └─ navbar/
+├─ interfaces/
+├─ lib/
+├─ utils/
+└─ public/images/
+```
+
+---
+
+## Cara Menjalankan
+
+1. Clone repository:
+
+```bash
+git clone <repo-url>
+```
+
+2. Masuk folder proyek:
+
+```bash
+cd <project-folder>
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+# atau
+yarn
+```
+
+4. Jalankan development server:
 
 ```bash
 npm run dev
-# or
+# atau
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Buka di browser:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Catatan Pengembangan
 
-To learn more about Next.js, take a look at the following resources:
+* Search dan kategori filter **di-handle client-side** karena DummyJSON API tidak mendukung filter kompleks.
+* Cart menggunakan **localStorage**, sehingga data tetap tersimpan tanpa backend.
+* Debounce quantity update untuk mengurangi penulisan berulang ke localStorage.
+* UI menggunakan **shadcn/ui + Tailwind CSS**, sehingga tampilan modern, konsisten, dan mudah dikustomisasi.
+* Skeleton loading menampilkan shimmer saat menunggu data produk dimuat, meningkatkan UX.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Screenshot / GIF Placeholder
 
-## Deploy on Vercel
+> Ganti placeholder dengan screenshot/GIF asli proyekmu:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* `./screenshots/search.png` → halaman search
+* `./screenshots/filter.png` → kategori filter
+* `./screenshots/cart.png` → cart page
+* `./screenshots/product.png` → product page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Apakah mau aku buatkan versi itu juga?
